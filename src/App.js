@@ -1,15 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import Login from './auth/Login';
-import Register from './auth/Register';
+import routes from './Routes/Routes';
+import { useRoutes } from 'react-router-dom';
 
 function App() {
-  return (
-    <div className="App">
-      <Login />
-      <Register />
-    </div>
-  );
+const element = useRoutes(routes);
+return element;
 }
 
 export default App;
