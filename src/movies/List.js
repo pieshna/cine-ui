@@ -41,7 +41,7 @@ function List() {
                 <tbody>
                     {movies.map(movie => (
                         <tr key={movie._id}>
-                            <td>{movie.title}</td>
+                            <td><Link to={`/asiento/list/${movie._id}`}>{movie.title}</Link> </td>
                             <td>{movie.genre}</td>
                             <td>{movie.year}</td>
                             <td>{movie.director}</td>
