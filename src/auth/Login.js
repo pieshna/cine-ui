@@ -17,12 +17,12 @@ function Login() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data.user._id);
+                console.log(data);
                 if (data.error) {
                     setError(data.error);
                 } else {
                     setError('');
-                    sessionStorage.setItem('id', data.user._id)
+                    localStorage.setItem('id', data);
                 }
             })
     }

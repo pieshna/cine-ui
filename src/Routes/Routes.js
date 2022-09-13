@@ -6,6 +6,7 @@ import View from "../asientos/Asientos";
 import Home from "../Home";
 import Compra from "../compra/Compra";
 import VerCombras from "../compra/VerCombras";
+import { Navigate } from "react-router-dom";
 
 const routes = [
     {
@@ -46,6 +47,10 @@ const routes = [
         path: "/vercompras",
         element: <VerCombras />,
         exact: true
+    },
+    {
+        path: "*",
+        element: <Navigate to="/" />
     }
 
 ];

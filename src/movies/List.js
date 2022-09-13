@@ -5,7 +5,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Create from './Create';
 
 function List() {
     const [movies, setMovies] = useState([]);
@@ -18,11 +17,12 @@ function List() {
                 console.log(data);
                 if (data.error) {
                     setError(data.error);
+                    console.log(error);
                 } else {
                     setMovies(data);
                 }
             })
-    }, [])
+    }, []);
 
     return (
         <div>
@@ -41,7 +41,7 @@ function List() {
                 <tbody>
                     {movies.map(movie => (
                         <tr key={movie._id}>
-                            <td><Link to={`/asiento/list/${movie._id}`}>{movie.title}</Link> </td>
+                            <td><Link to={`/asiento/list/${movie._id}`}>{movie.name}</Link> </td>
                             <td>{movie.genre}</td>
                             <td>{movie.year}</td>
                             <td>{movie.director}</td>
