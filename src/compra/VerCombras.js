@@ -9,7 +9,7 @@ class VerCombras extends Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:4000/compra/list/" + sessionStorage.getItem("id"))
+    fetch(`${process.env.REACT_APP_API}/compra/list/${sessionStorage.getItem("id")}`)
       .then((res) => res.json())
       .then((data) => {
         this.setState({ datos: data });
@@ -53,7 +53,7 @@ class VerCombras extends Component {
 const Child = ({ data }) => {
   const [movie, setMovie] = useState("");
   useEffect(() => {
-    fetch(`http://localhost:4000/movie/list/${data}`)
+    fetch(`${process.env.REACT_APP_API}/movie/list/${data}`)
       .then((res) => res.json())
       .then((data) => {
         //console.log(data.title);

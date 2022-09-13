@@ -15,7 +15,7 @@ class Compra extends Component {
     }
     render() {
         const comprar=()=>{
-            fetch(process.env.REACT_APP_API+'/compra/list' , {
+            fetch(process.env.REACT_APP_API+'/compra/create' , {
                 method: 'POST',
                 body: this.state.datos,
                 headers: {

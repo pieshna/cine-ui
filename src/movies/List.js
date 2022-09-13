@@ -11,7 +11,7 @@ function List() {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:4000/movie/list')
+        fetch(`${process.env.REACT_APP_API}/movie/list`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -41,7 +41,7 @@ function List() {
                 <tbody>
                     {movies.map(movie => (
                         <tr key={movie._id}>
-                            <td><Link to={`/asiento/list/${movie._id}`}>{movie.name}</Link> </td>
+                            <td><Link to={`/asiento/list/${movie._id}`}>{movie.title}</Link> </td>
                             <td>{movie.genre}</td>
                             <td>{movie.year}</td>
                             <td>{movie.director}</td>

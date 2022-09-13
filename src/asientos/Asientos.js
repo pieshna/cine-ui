@@ -13,7 +13,7 @@ function View() {
   const [asientosSeleccionados, setAsientosSeleccionados] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:4000/asiento/list/${id}`)
+    fetch(`${process.env.REACT_APP_API}/asiento/list/${id}`)
       .then((res) => res.json())
       .then((data) => {
         //console.log(data);
@@ -23,29 +23,51 @@ function View() {
           setAsientos(data);
         }
       });
-      fetch(`http://localhost:4000/movie/list/${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-            //console.log(data.title);
-            if (data.error) {
-                setError(data.error);
-            } else {
-                setMovie(data.title);
-            }
-            }
-        );
+    fetch(`${process.env.REACT_APP_API}/movie/list/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(data.title);
+        if (data.error) {
+          setError(data.error);
+        } else {
+          setMovie(data.title);
+        }
+      });
   }, []);
 
-  const guardamos=()=>{
-    sessionStorage.setItem('orden',JSON.stringify({
-        "userId": sessionStorage.getItem('id'),
-        "movieId": id,
-        "asientos": "A3",
-        "total":100,
-        "pago":"efectivo",
-        "butacas":orden,
-      }));
-  }
+  const guardamos = () => {
+    sessionStorage.setItem(
+      "orden",
+      JSON.stringify({
+        userId: sessionStorage.getItem("id"),
+        movieId: id,
+        asientos: recorremosArreglo(asientosSeleccionados),
+        total: 100,
+        pago: "efectivo",
+        butacas: orden,
+      })
+    );
+  };
+
+  const recorremosArreglo = (e) => {
+    let asientos = "";
+    for (let i = 0; i < e.length; i++) {
+      if (asientos === "") {
+        asientos += e[i];
+      } else {
+        asientos += "," + e[i];
+      }
+    }
+
+    return asientos;
+  };
+
+  const seleccionarAsiento = (row, column) => {
+    const letra = String.fromCharCode(65 + row);
+    const numero = column + 1;
+    const asiento = letra + numero;
+    return asiento;
+  };
 
   return (
     <div>
@@ -63,24 +85,43 @@ function View() {
             <tr key={asiento._id}>
               <td>{movie}</td>
               <td>
-                {
-                    asiento.asientos.map((asiento,index) => (
-                        <button key={index} className={`${asiento.column ==0? 'btn':null} ${asiento.isAvailable==false? 'disabled':null}`}
-                        onClick={() => {
-                            //console.log('fila '+asiento.row+' columna '+asiento.column);
-                            setOrden([...orden,{row:asiento.row,column:asiento.column}]);
-                            //console.log(orden);
-                        }                        }
-                        > {asiento.column+1} {asiento.isAvailable? "si":"no" }</button>
-                    ))
-                }
+                {asiento.asientos.map((asiento, index) => (
+                  <button
+                    key={index}
+                    className={`${asiento.column == 0 ? "btn" : null} ${
+                      asiento.isAvailable == false ? "disabled" : null
+                    }`}
+                    onClick={() => {
+                      //console.log('fila '+asiento.row+' columna '+asiento.column);
+                      setOrden([
+                        ...orden,
+                        { row: asiento.row, column: asiento.column },
+                      ]);
+                      setAsientosSeleccionados([
+                        ...asientosSeleccionados,
+                        seleccionarAsiento(asiento.row, asiento.column),
+                      ]);
+                      //console.log(recorremosArreglo(asientosSeleccionados));
+                    }}
+                  >
+                    {" "}
+                    {asiento.column + 1} {asiento.isAvailable ? "si" : "no"}
+                  </button>
+                ))}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       <Link to={`/movie/list`}>Back</Link>
-      <Link to={`/compra`} onClick={()=>{guardamos()}}>Orden</Link>
+      <Link
+        to={`/compra`}
+        onClick={() => {
+          guardamos();
+        }}
+      >
+        Orden
+      </Link>
     </div>
   );
 }

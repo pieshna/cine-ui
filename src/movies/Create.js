@@ -12,7 +12,7 @@ function Create() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const movie = { title, genre, year, director };
-        fetch('http://localhost:4000/movie/create', {
+        fetch(`${process.env.REACT_APP_API}/movie/create`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(movie)

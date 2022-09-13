@@ -8,7 +8,7 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:4000/auth/login', {
+        fetch(`${process.env.REACT_APP_API}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -17,12 +17,13 @@ function Login() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 if (data.error) {
                     setError(data.error);
                 } else {
                     setError('');
-                    localStorage.setItem('id', data);
+                    sessionStorage.setItem('id', data.user._id);
+                    //console.log(data.user._id)
                 }
             })
     }

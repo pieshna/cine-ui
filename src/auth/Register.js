@@ -13,7 +13,7 @@ function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:4000/auth/register', {
+        fetch(`${process.env.REACT_APP_API}/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
