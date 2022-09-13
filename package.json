@@ -1,5 +1,5 @@
 {
-  "homepage":"https://pieshna.github.io/cine-ui",
+  "homepage": "https://pieshna.github.io/cine-ui",
   "name": "cine-ui",
   "version": "0.1.0",
   "private": true,
@@ -41,6 +41,9 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "autoprefixer": "^10.4.9",
+    "gh-pages": "^4.0.0",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
   }
 }

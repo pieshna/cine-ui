@@ -18,33 +18,33 @@ class VerCombras extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Compras</h1>
-        <table>
+      <div className="p-9 m-auto">
+        <h1 className="font-bold text-2xl text-center mb-6">Compras</h1>
+        <table className="m-auto table-auto mb-10">
           <thead>
             <tr>
-              <th>Pelicula</th>
-              <th>Asientos</th>
-              <th>Total</th>
-              <th>Pago</th>
+              <th className="border border-texto px-12 py-2">Pelicula</th>
+              <th className="border border-texto px-12 py-2">Asientos</th>
+              <th className="border border-texto px-12 py-2">Total</th>
+              <th className="border border-texto px-12 py-2">Pago</th>
             </tr>
           </thead>
           <tbody>
             {this.state.datos.map((dato) => (
               <tr key={dato._id}>
-                <td>
+                <td className="border border-texto px-2">
                   {" "}
                   <Child data={dato.movieId} />{" "}
                 </td>
-                <td>{dato.asientos}</td>
-                <td>{dato.total}</td>
-                <td>{dato.pago}</td>
+                <td className="border border-texto px-2">{dato.asientos}</td>
+                <td className="border border-texto px-2">{dato.total}</td>
+                <td className="border border-texto px-2">{dato.pago}</td>
               </tr>
             ))}
           </tbody>
         </table>
 
-        <Link to="/">Home</Link>
+        <Link className="border border-texto hover:bg-texto hover:text-white p-4 rounded-xl" to="/">Regresar</Link>
       </div>
     );
   }

@@ -7,10 +7,10 @@ import Navbar from './Navbar';
 function App() {
 const element = useRoutes(routes);
 return (
-  <>
+  <div className='bg-fondoClaro min-h-screen'>
   {sessionStorage.getItem('id')? <Navbar />:null}
   {element}
-  </>
+  </div>
 )
 }
 
